@@ -25,4 +25,7 @@ public class Schedule {
 
     @Column(name = "jam_selesai")
     private LocalTime jamSelesai;
+
+    @Column(name = "harga_tiket")
+    private int harga;
 }
