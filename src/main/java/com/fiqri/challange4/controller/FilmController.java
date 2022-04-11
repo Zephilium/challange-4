@@ -1,7 +1,7 @@
 package com.fiqri.challange4.controller;
 
-import com.fiqri.challange4.entity.User;
-import com.fiqri.challange4.service.UserService;
+import com.fiqri.challange4.entity.Film;
+import com.fiqri.challange4.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,20 +10,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/film")
+public class FilmController {
+
     @Autowired
-    private UserService userService;
+    private FilmService filmService;
 
     @PostMapping("/add")
-    public User addUser(@RequestBody User user) {
-        return userService.addUser(user);
+    public Film addFilm(@RequestBody Film film) {
+        return filmService.addFilm(film);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateUser(@RequestBody User user) {
+    public ResponseEntity<String> updateFilm(@RequestBody Film film) {
         try {
-            userService.updateUser(user);
+            filmService.updateFilm(film);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (NoSuchElementException e) {
             System.out.println(e.getMessage());
@@ -31,14 +32,16 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/delete/{username}")
-    public ResponseEntity<String> deleteUser(@PathVariable String username) {
+    @DeleteMapping("/delete/{filmCode}")
+    public ResponseEntity<String> deleteFilm(@PathVariable String filmCode) {
         try {
-            userService.deleteUser(username);
+            filmService.deleteFilm(filmCode);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (NoSuchElementException e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+
 }
